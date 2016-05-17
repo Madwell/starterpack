@@ -21,7 +21,7 @@ function theme_scripts_styles() {
     // Use non-minified JS files for local dev, otherwise load single concatinated app.js
 	if( $debugging )  {
 		
-	    wp_enqueue_script( 'theme-scripts', get_stylesheet_directory_uri() . '/js/interaction.js', array( 'jquery' ), $version_number, true );
+        wp_enqueue_script( 'theme-scripts', get_stylesheet_directory_uri() . '/js/interaction.js', array( 'jquery' ), $version_number, true );
         // ... add more scripts as you use them
 
 	} 
@@ -36,3 +36,32 @@ function theme_scripts_styles() {
 }
 
 add_action( 'wp_enqueue_scripts', 'theme_scripts_styles' );
+
+function theme_setup() {
+
+    // Adds RSS feed links to <head> for posts and comments.
+    add_theme_support( 'automatic-feed-links' );
+
+    // This theme uses wp_nav_menu() some locations
+    register_nav_menus(
+        array(
+            'main-menu' => __( 'Main Menu' ),
+        )
+    );
+
+    //  Enable featured images for posts
+    add_theme_support( 'post-thumbnails' );
+
+    // Replaces the excerpt "more" text
+    // function new_excerpt_more($more) {
+    //     global $post;
+    //     return '<a class="more-tag" href="'. get_permalink($post->ID) . '">Read more</a>';
+    // }
+    // add_filter('excerpt_more', 'new_excerpt_more');
+
+}
+
+add_action( 'after_setup_theme', 'theme_setup' );
+
+// Custom WP Walker
+@include 'utilities/walker.php';
