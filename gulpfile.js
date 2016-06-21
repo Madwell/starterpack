@@ -12,21 +12,32 @@ function errorHandler (error) {
     this.emit('end');
 }
 
-gulp.task('uglify-then-concat-js', function () {
+gulp.task('uglify-concat', function () {
     gulp.src([
             './public_html/wp-content/themes/CHANGEME/js/interaction.js',
-    	])
-    	.pipe(debug())
+        ])
+        .pipe(debug())
         .pipe(uglify())
+        .on('error', errorHandler)
+        .pipe(concat('app.min.js'))
+        .pipe(gulp.dest('./public_html/wp-content/themes/CHANGEME/js'))
+        .pipe(livereload());
+});
+
+gulp.task('concat', function () {
+    gulp.src([
+            './public_html/wp-content/themes/CHANGEME/js/interaction.js',
+        ])
+        .pipe(debug())
         .on('error', errorHandler)
         .pipe(concat('app.js'))
         .pipe(gulp.dest('./public_html/wp-content/themes/CHANGEME/js'))
         .pipe(livereload());
 });
 
-gulp.task('compile-sass', function() {
-	gulp.src('./public_html/wp-content/themes/CHANGEME/css/theme.scss')
-    	.pipe(debug())
+gulp.task('sass', function() {
+    gulp.src('./public_html/wp-content/themes/CHANGEME/css/theme.scss')
+        .pipe(debug())
         .on('error', errorHandler)
         .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
         .pipe(gulp.dest('./public_html/wp-content/themes/CHANGEME/css'))
@@ -37,13 +48,13 @@ gulp.task('compile-sass', function() {
 gulp.task('watch', function() {
 
     livereload.listen();
-    gulp.watch('./public_html/wp-content/themes/CHANGEME/css/*.scss', ['compile-sass']);
-    gulp.watch('./public_html/wp-content/themes/CHANGEME/js/interaction.js', ['uglify-then-concat-js']);
+    gulp.watch('./public_html/wp-content/themes/CHANGEME/css/*.scss', ['sass']);
+    gulp.watch('./public_html/wp-content/themes/CHANGEME/js/interaction.js', ['concat']);
 
 });
 
 gulp.task('default', [
-	'uglify-then-concat-js',
-	'compile-sass',
+    'uglify-concat',
+    'sass',
     'watch',
 ]);

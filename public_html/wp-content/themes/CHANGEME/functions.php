@@ -21,17 +21,15 @@ function theme_scripts_styles() {
     // Use non-minified JS files for local dev, otherwise load single concatinated app.js
 	if( $debugging )  {
 		
-        wp_enqueue_script( 'theme-scripts', get_stylesheet_directory_uri() . '/js/interaction.js', array( 'jquery' ), $version_number, true );
+        wp_enqueue_script( 'theme-scripts', get_stylesheet_directory_uri() . '/js/app.js', array( 'jquery' ), $version_number, true );
         // ... add more scripts as you use them
 
 	} 
 	else {
 
-    	wp_enqueue_script( 'all-js', get_stylesheet_directory_uri() . '/js/app.js', array( 'jquery' ), $version_number, true );
+    	wp_enqueue_script( 'all-js', get_stylesheet_directory_uri() . '/js/app.min.js', array( 'jquery' ), $version_number, true );
 
     }
-
-    // Only load (beefy) visualization scripts
 
 }
 
@@ -51,14 +49,6 @@ function theme_setup() {
 
     //  Enable featured images for posts
     add_theme_support( 'post-thumbnails' );
-
-    // Replaces the excerpt "more" text
-    // function new_excerpt_more($more) {
-    //     global $post;
-    //     return '<a class="more-tag" href="'. get_permalink($post->ID) . '">Read more</a>';
-    // }
-    // add_filter('excerpt_more', 'new_excerpt_more');
-
 }
 
 add_action( 'after_setup_theme', 'theme_setup' );

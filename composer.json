@@ -27,6 +27,7 @@
 		"php": ">=5.4",
 		"johnpbloch/wordpress": "4.*",
 		"wpackagist-plugin/contact-form-7": "4.4",
+		"wpackagist-plugin/disable-emojis": "1.5.1",
 		"wpackagist-plugin/simple-page-ordering": "2.2.4",
 		"advanced-custom-fields/advanced-custom-fields-pro": "5.3.4"
 	}
