@@ -21,13 +21,13 @@ function theme_scripts_styles() {
     // Use non-minified JS files for local dev, otherwise load single concatinated app.js
 	if( $debugging )  {
 		
-        wp_enqueue_script( 'theme-scripts', get_stylesheet_directory_uri() . '/js/app.js', array( 'jquery' ), $version_number, true );
-        // ... add more scripts as you use them
+        wp_enqueue_script( 'concatinated-js', get_stylesheet_directory_uri() . '/js/app.js', array( 'jquery' ), $version_number, true );
+        // ... add more scripts as you use them and don't include them in Gulp
 
 	} 
 	else {
 
-    	wp_enqueue_script( 'all-js', get_stylesheet_directory_uri() . '/js/app.min.js', array( 'jquery' ), $version_number, true );
+    	wp_enqueue_script( 'minified-js', get_stylesheet_directory_uri() . '/js/app.min.js', array( 'jquery' ), $version_number, true );
 
     }
 

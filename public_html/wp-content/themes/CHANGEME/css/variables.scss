@@ -25,7 +25,7 @@
 	-o-transition: $transition;
 }
 
-@mixin transform( $transform ) {
+@mixin transform( $transform... ) {
 	transform: $transform;
 	-webkit-transform: $transform;
 	-moz-transform: $transform;
@@ -37,4 +37,52 @@
 	*zoom: 1;
 	&:before, &:after { display: table; content: ""; }
 	&:after { clear: both; }
+}
+
+@mixin aspect-ratio($ratio-or-width, $height: null) {
+    $padding: if($height, percentage($height/$ratio-or-width), percentage(1/$ratio-or-width));
+    &:before { content:''; display: table-row; float: left; padding-bottom: $padding;  }
+    &:after  { content:''; display: table; clear: both;  } 
+}
+
+@mixin placeholder($color, $fontsize, $lineheight){
+	&::-webkit-input-placeholder { color: $color; font-size: $fontsize; line-height: $lineheight; text-transform: uppercase }
+	&:-moz-placeholder { color: $color; font-size: $fontsize; line-height: $lineheight; text-transform: uppercase }
+	&::-moz-placeholder { color: $color; font-size: $fontsize; line-height: $lineheight; text-transform: uppercase }
+	&:-ms-input-placeholder { color: $color; font-size: $fontsize; line-height: $lineheight; text-transform: uppercase }
+}
+
+@mixin responsive-font( $window, $font, $min: false, $max: false ) {
+
+	$responsive-unitless: $font / ( $window / 100 );
+	$responsive: $responsive-unitless + vw;
+
+	@if $min {
+		$min-breakpoint: $min / $responsive-unitless * 100;
+
+		@media (max-width: #{$min-breakpoint}) {
+			font-size: $min;
+		}
+	}
+
+	@if $max {
+		$max-breakpoint: $max / $responsive-unitless * 100;
+
+		@media (min-width: #{$max-breakpoint}) {
+			font-size: $max;
+		}
+	}
+
+	font-size: $font;
+	font-size: $responsive;
+}
+
+@mixin middle {
+	width: 100%;
+	position: absolute;
+	max-height: 100%;
+	max-width: 100%;
+	top: 50%;
+	left: 50%;
+	@include transform( translate(-50%, -50%) );
 }
