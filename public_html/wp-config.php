@@ -14,6 +14,15 @@
  * @package WordPress
  */
 
+//
+// This Space reserved for WP-Cache
+//
+// define('WP_CACHE', true); 
+// define( 'WPCACHEHOME', '' );
+
+
+// Database configs
+
 if( file_exists( dirname( __FILE__ ) . '/../config/local-config.php' ) ) 
 {
 	require( dirname( __FILE__ ) . '/../config/local-config.php' );
