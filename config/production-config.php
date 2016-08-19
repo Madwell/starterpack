@@ -1,5 +1,5 @@
 <?php
-die('set credentials in config/production-config.php')
+die('set credentials in config/production-config.php');
 define('DB_NAME',            '');
 define('DB_USER',            '');
 define('DB_PASSWORD',        '');
