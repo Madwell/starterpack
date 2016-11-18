@@ -1,10 +1,34 @@
 
-// Content areas
+// Z-Index
 
-.wrapper {
-	max-width: 1060px;
-	padding: 0 20px;
-}
+$z-index-base: 1;
+$z-index-mid: 2;
+$z-index-high: 3;
+$z-index-uber: 4;
+
+
+// Design sizes
+
+$lgdesktop-design: 1440px;
+$smdesktop-design: 1024px;
+$tablet-design: 768px;
+$mobile-design: 375px;
+
+
+// Breakpoints
+
+$lgdesktop-breakpoint: 1440px;
+$smdesktop-breakpoint: 1200px;
+$tablet-breakpoint: 1023px;
+$mobile-breakpoint: 600px;
+
+
+// Media Queries
+
+$lgdesktop-query: 'only screen and (max-width: ' + $lgdesktop-breakpoint + ')';
+$smdesktop-query: 'only screen and (max-width: ' + $smdesktop-breakpoint + ')';
+$tablet-query: 'only screen and (max-width: ' + $tablet-breakpoint + ')';
+$mobile-query: 'only screen and (max-width: ' + $mobile-breakpoint + ')';
 
 
 // Colors
@@ -12,6 +36,9 @@
 
 
 // Fonts
+
+// $header-font: "Custom Font", sans-serif;
+// $body-font: "Custom Font", sans-serif;
 
 
 
@@ -85,4 +112,52 @@
 	top: 50%;
 	left: 50%;
 	@include transform( translate(-50%, -50%) );
+}
+
+
+// Functions
+
+@function rv( $window, $value  ) {
+
+	$design-width: $window;
+
+	@if $window == l {
+		$design-width: $lgdesktop-design;
+	} @else if $window == s {
+		$design-width: $smdesktop-design;
+	} @else if $window == t {
+		$design-width: $tablet-design;
+	} @else if $window == m {
+		$design-width: $mobile-design;
+	}
+
+	$responsive-unitless: $value / ( $design-width / 100 );
+	$responsive: $responsive-unitless + vw;
+	@return $responsive;
+
+}
+
+
+// Utility classes
+
+.middle {
+	@include middle;
+}
+
+.clearfix {
+	@include clearfix;
+}
+
+.float-right,
+[class^="col-"].float-right, 
+[class*=" col-"].float-right {
+	float: right;
+}
+
+.hidden {
+	display: none;
+}
+
+.centered {
+	text-align: center;
 }
