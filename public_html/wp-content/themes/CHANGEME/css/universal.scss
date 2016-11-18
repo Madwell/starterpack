@@ -1,5 +1,8 @@
-body, html {
-	
+
+*,
+body,
+html {
+	// font-family: $body-font;
 }
 
 html {
@@ -8,4 +11,59 @@ html {
 
 body {
 	min-height: 100%;
+}
+
+
+// Typography
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	// font-family: $header-font;
+}
+
+
+// Structure
+
+.wrapper {
+	max-width: 1576px; // 1536 without padding
+	padding: 0 20px;
+}
+
+@media #{$lgdesktop-query} {
+
+	.wrapper {
+		max-width: 1060px; 
+		padding: 0 20px; 
+	}
+
+}
+
+@media #{$smdesktop-query} {
+
+	.wrapper {
+		max-width: 1060px; 
+		padding: 0 20px; 
+	}
+
+}
+
+@media #{$tablet-query} {
+
+	.wrapper {
+		max-width: 100%; 
+		padding: 0 20px; 
+	}
+
+}
+
+@media #{$mobile-query} {
+
+	.wrapper {
+		padding: 0 20px; 
+	}
+
 }
