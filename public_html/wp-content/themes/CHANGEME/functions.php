@@ -16,18 +16,18 @@ function theme_scripts_styles() {
 
     // Theme registration stylesheet, combined theme stylesheet and any other necessary styles
     wp_enqueue_style( 'registration-stylesheet', get_stylesheet_directory_uri() . '/style.css', $version_number );
-    wp_enqueue_style( 'theme-styles', get_stylesheet_directory_uri() . '/css/theme.css', $version_number );
 
-    // Use non-minified JS files for local dev, otherwise load single concatinated app.js
+    // Use JS files with looser linting for local dev
 	if( $debugging )  {
 		
-        wp_enqueue_script( 'concatinated-js', get_stylesheet_directory_uri() . '/js/app.js', array( 'jquery' ), $version_number, true );
-        // ... add more scripts as you use them and don't include them in Gulp
+        wp_enqueue_script( 'dev-js', get_stylesheet_directory_uri() . '/dist/app.js', array( 'jquery' ), $version_number, true );
+        wp_enqueue_style( 'dev-styles', get_stylesheet_directory_uri() . '/dist/styles.css', $version_number );
 
 	} 
 	else {
 
-    	wp_enqueue_script( 'minified-js', get_stylesheet_directory_uri() . '/js/app.min.js', array( 'jquery' ), $version_number, true );
+    	wp_enqueue_script( 'prod-js', get_stylesheet_directory_uri() . '/build/app.js', array( 'jquery' ), $version_number, true );
+        wp_enqueue_style( 'prod-styles', get_stylesheet_directory_uri() . '/build/styles.css', $version_number );
 
     }
 
