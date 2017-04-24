@@ -97,9 +97,10 @@ module.exports = function(env){
 
 	        // Browser sync
 	        new browserSyncPlugin({
-				host: 'localhost',
-				port: 3000,
-				proxy: 'starterpack.madwell.walt'
+	        	open: 'external',
+				host: 'starterpack.madwell.walt',
+				proxy: 'starterpack.madwell.walt',
+				port: 3000
 	        })
    		]
 	}
