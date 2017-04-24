@@ -24,7 +24,8 @@
   "scripts": {
     "start": "webpack --watch",
     "build": "webpack",
-    "stop": "pkill -f node_modules/.bin/webpack-dev-server",
-    "tkill": "taskkill /f /im node.exe"
+    "is-windows": "node -e \"process.exit(process.platform === 'win32' ? 0 : 1);\"",
+    "is-nix": "node -e \"process.exit(process.platform !== 'win32' ? 0 : 1);\"",
+    "stop": "npm run is-nix --loglevel=silent && killall -9 node || taskkill /f /im node.exe"
   }
 }
