@@ -7,6 +7,7 @@ Thumbs.db
 .DS_Store
 *.log
 vendor
+composer.lock
 node_modules
 
 *.sublime-project
@@ -36,3 +37,6 @@ public_html/sitemap.xml.gz
 public_html/*.log
 public_html/sitemap.xml
 public_html/sitemap.xml.gz
+
+public_html/wp-content/themes/*/dist
+public_html/wp-content/themes/*/build

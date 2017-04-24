@@ -1,1 +1,0 @@
-jQuery(function(n){n(document).ready(function(){})});
