@@ -32,15 +32,15 @@ module.exports = function(env){
 		// Destination for bundles
 		output: {
 			filename: '[name].js',
-			path: PROD ? themePath + 'build' : themePath + 'dist',
+			path: PROD ? themePath + 'build' : themePath + 'dist'
 		},
 
-		// Rules for bundling 
+		// Rules for bundling
 		module: {
 
 			rules: [
 
-				// Linting 
+				// Linting
 				{
 					enforce: 'pre', // Lint before Babel
 					test: /\.js$/,
@@ -65,7 +65,7 @@ module.exports = function(env){
 					exclude:  __dirname + '/node_modules',
 					loader: extractCSS.extract({
 						fallback: 'style-loader',
-						use: 'css-loader!sass-loader',
+						use: 'css-loader?-url!sass-loader',
 					})
 				}
 			]
@@ -74,34 +74,34 @@ module.exports = function(env){
 		plugins: [
 
 			// Create static SCSS file from resulting bundle, instead of injecting into JS
-    		new extractCSS("styles.css"),
+			new extractCSS("styles.css"),
 
-    		// Used for uglifying
-	        new webpack.LoaderOptionsPlugin({
-	            minimize: true,
-	            debug: false
-	        }),
+			// Used for uglifying
+			new webpack.LoaderOptionsPlugin({
+				minimize: true,
+				debug: false
+			}),
 
-	        // Uglify JS
-	        new webpack.optimize.UglifyJsPlugin({
-	            beautify: false,
-	            mangle: {
-	                screw_ie8: true,
-	                keep_fnames: true
-	            },
-	            compress: {
-	                screw_ie8: true
-	            },
-	            comments: false
-	        }),
+			// Uglify JS
+			new webpack.optimize.UglifyJsPlugin({
+				beautify: false,
+				mangle: {
+					screw_ie8: true,
+					keep_fnames: true
+				},
+				compress: {
+					screw_ie8: true
+				},
+				comments: false
+			}),
 
-	        // Browser sync
-	        new browserSyncPlugin({
-	        	open: 'external',
+			// Browser sync
+			new browserSyncPlugin({
+				open: 'external',
 				host: 'starterpack.madwell.walt',
 				proxy: 'starterpack.madwell.walt',
 				port: 3000
-	        })
-   		]
+			})
+		]
 	}
 };
